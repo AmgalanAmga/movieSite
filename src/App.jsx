@@ -4,7 +4,7 @@ import { Login, Movies, Order, Seats, Signup } from './pages'
 
 const App = () => {
   return (
-    <div className="w-full h-[200vh] bg-[#5C8C8C]">
+    <div className="w-full h-[200vh] bg-[#192831]">
       <div className="relative top-0 left-0 h-full max-w-screen-xl mx-auto">
         <Navbar />
         <Routes>

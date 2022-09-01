@@ -5,10 +5,6 @@ import { useAuth } from '../context/AuthContext'
 
 export const Navbar = () => {
   const { currentUser, isLoggedIn, setIsLoggedIn } = useAuth()
-  console.log(currentUser)
-  if (window.localStorage.getItem('userLogged')) {
-    setIsLoggedIn(true)
-  }
   const DefaultLog = () => {
     return (
       <>
@@ -19,8 +15,8 @@ export const Navbar = () => {
     )
   }
   const UserLoggedIn = () => {
-    const logoutFunction = (e) => {}
-    if (window.localStorage.getItem('userLogged')) {
+    const logoutFunction = (e) => {
+      setIsLoggedIn(false)
     }
     return (
       <>

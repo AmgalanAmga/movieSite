@@ -1,45 +1,44 @@
-import { MovieContext } from '../context/MovieContext'
-import { useContext, useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+ import { MovieContext } from "../context/MovieContext";
+import { useContext, useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const Order = () => {
-  const [detailMovie, setDetailMovie] = useState([])
-  const { movieAPI, adult, children, movieTime, mDetails } = useContext(
-    MovieContext,
-  )
-  const [time, setTime] = movieTime
-  const [adultAmount, setAdultAmount] = adult
-  const [moviesDetails, setMoviesDetails] = mDetails
-  const [childrenAmount, setChildrenAmount] = children
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const timeArray = ['12:00', '14:20', '16:20', '19:10', '21:40']
+  const [detailMovie, setDetailMovie] = useState([]);
+  const { movieAPI, adult, children, movieTime, mDetails } =
+    useContext(MovieContext);
+  const [time, setTime] = movieTime;
+  const [adultAmount, setAdultAmount] = adult;
+  const [moviesDetails, setMoviesDetails] = mDetails;
+  const [childrenAmount, setChildrenAmount] = children;
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const timeArray = ["12:00", "14:20", "16:20", "19:10", "21:40"];
   useEffect(() => {
     if (id) {
       movieAPI.forEach((movie) => {
-        if (movie.id === parseInt(id)) return setDetailMovie(movie)
-      })
+        if (movie.id === parseInt(id)) return setDetailMovie(movie);
+      });
     }
-  }, [id, movieAPI])
+  }, [id, movieAPI]);
   const toSeatsPage = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!adultAmount && !childrenAmount)
-      return alert('Хүний тоогоо сонгоно уу?')
-    if (!time) return alert('Цагаа сонгоно уу?')
-    return [setMoviesDetails(detailMovie), navigate('/seats')]
-  }
+      return alert("Хүний тоогоо сонгоно уу?");
+    if (!time) return alert("Цагаа сонгоно уу?");
+    return [setMoviesDetails(detailMovie), navigate("/seats")];
+  };
   const getTime = (e) => {
-    const { id } = e.target
-    const timeButton = document.querySelectorAll('button')
+    const { id } = e.target;
+    const timeButton = document.querySelectorAll("button");
     timeButton.forEach((button) => {
-      if (button.getAttribute('id') === id)
-        return (button.style.backgroundColor = 'gray')
-      return (button.style.backgroundColor = '#38BDF8')
-    })
+      if (button.getAttribute("id") === id)
+        return (button.style.backgroundColor = "gray");
+      return (button.style.backgroundColor = "#38BDF8");
+    });
 
-    setTime(id)
-  }
-  
+    setTime(id);
+  };
+
   return (
     <div className="absolute top-0 left-0 w-full ">
       <div className="relative">
@@ -56,9 +55,7 @@ export const Order = () => {
           <p className="w-full md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%] text-gray-200 text-justify text-xl">
             {detailMovie.overview}
           </p>
-          <button
-            className="py-2 px-4 bg-blue-500 text-2xl mt-3 rounded-md"
-          >
+          <button className="py-2 px-4 bg-blue-500 text-2xl mt-3 rounded-md">
             Video
           </button>
         </div>
@@ -69,13 +66,13 @@ export const Order = () => {
         />
       </div>
       <div className="w-full flex flex-col items-center justify-center">
-        <h1 className="text-4xl text-white font-semibold">Цагийн хуваарь</h1>
+        <h1 className="text-4xl text-white font-semibold mt-5">Цагийн хуваарь</h1>
         <div className="flex mt-10 space-x-6">
           {timeArray.map((time) => (
             <button
               id={time}
               onClick={getTime}
-              className="p-4 text-2xl text-white rounded-lg bg-[#38BDF8] hover:bg-sky-500/70"
+              className="p-4 text-2xl text-white rounded-lg bg-[#685268] hover:bg-sky-500/70"
             >
               {time}
             </button>
@@ -101,7 +98,7 @@ export const Order = () => {
               type="number"
               className="p-2 border-2"
               value={adultAmount}
-              min={'0'}
+              min={"0"}
               onChange={(e) => setAdultAmount(e.target.value)}
             />
           </div>
@@ -115,7 +112,7 @@ export const Order = () => {
             <input
               type="number"
               className="p-2 border-2"
-              min={'0'}
+              min={"0"}
               value={childrenAmount}
               onChange={(e) => setChildrenAmount(e.target.value)}
             />
@@ -129,5 +126,5 @@ export const Order = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

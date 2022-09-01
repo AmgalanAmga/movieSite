@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 export const Login = () => {
-  const { login, setCurrentUser } = useAuth()
+  const { login, setCurrentUser, setIsLoggedIn } = useAuth()
   const emailRef = useRef()
   const passwordRef = useRef()
   const navigate = useNavigate()
@@ -14,8 +14,9 @@ export const Login = () => {
         passwordRef.current.value,
       )
       setCurrentUser(user.user.email)
+      setIsLoggedIn(true)
       navigate('/')
-      window.localStorage.setItem('userLogged', true)
+
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
         alert('Буруу код засдаа 💢')
